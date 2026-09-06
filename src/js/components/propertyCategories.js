@@ -43,7 +43,7 @@ export const explorePropertiesData = [
 
 export function renderPropertyCategories() {
   const cardsHtml = explorePropertiesData.map(item => `
-    <div class="ref-explore-card" data-category="${item.id}">
+    <div class="ref-explore-card" data-category="${item.id}" onclick="window.location.href='${item.link}'" style="cursor: pointer;">
       <div class="ref-explore-img-wrap">
         <img src="${item.image}" alt="${item.title}" class="ref-explore-img" loading="lazy" />
         <span class="ref-explore-img-badge">${item.badgeText.replace('\n', '<br/>')}</span>
