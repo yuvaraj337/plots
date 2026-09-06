@@ -65,7 +65,6 @@ export const heroSlidesData = [
     ],
     taglineHtml: `<span class="ref-handwritten">Spaces for a Better Tomorrow</span>`,
     image: heroVilla,
-    imageTagline: 'Live Greener Own Greater',
     floatingCardText: 'Modern Homes for a Healthier Tomorrow'
   },
   {
@@ -189,36 +188,51 @@ export function renderHero() {
           </div>
         </div>
 
-        <!-- Right Side: Property Visual with Organic Boundary -->
+        <!-- Right Side: Property Visual with Organic Boundary & Exact Shadow -->
         <div class="ref-hero-right">
-          <div class="ref-hero-visual-container">
-            <img src="${slide.image}" alt="${slide.category}" class="ref-hero-main-img" />
-            
-            <!-- Cursive Image Tagline Overlay -->
-            <div class="ref-hero-image-tagline">
-              <span class="ref-hero-image-tagline-text">${slide.imageTagline}</span>
-            </div>
+          <div class="ref-hero-visual-frame">
+            <!-- 1. Organic White Card Base with Exact Reference Drop-Shadow -->
+            <svg class="ref-hero-shadow-card-svg" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" style="overflow: visible;">
+              <path d="M 0.257,0 C 0.162,0 0.1061,0.0298 0.0838,0.0909 C 0.067,0.1364 0,0.2926 0,0.3849 C 0,0.4631 0.1006,0.7614 0.1464,0.8679 C 0.1687,0.9205 0.2011,1 0.257,1 L 0.95,1 Q 1,1 1,0.94 L 1,0.06 Q 1,0 0.95,0 Z" 
+                    fill="#FFFFFF" 
+                    stroke="#FFFFFF" 
+                    stroke-width="36" 
+                    vector-effect="non-scaling-stroke" 
+                    stroke-linejoin="round" />
+            </svg>
 
-            <!-- Floating Info Card Overlay -->
-            <div class="ref-hero-floating-card">
-              <div class="ref-hero-floating-card-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <!-- 2. The Photo Container Clipped to the Organic Curve -->
+            <div class="ref-hero-visual-container">
+              <img src="${slide.image}" alt="${slide.category}" class="ref-hero-main-img" />
+              
+              <!-- Cursive Image Tagline Overlay -->
+              ${slide.imageTagline ? `
+              <div class="ref-hero-image-tagline">
+                <span class="ref-hero-image-tagline-text">${slide.imageTagline}</span>
               </div>
-              <div class="ref-hero-floating-card-text">${slide.floatingCardText}</div>
-            </div>
+              ` : ''}
 
-            <!-- Interactive Arrow Controls Overlay matching screenshot placement -->
-            <div class="ref-hero-arrows-overlay">
-              <button class="ref-hero-nav-arrow prev" aria-label="Previous Slide" data-action="prev">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-              </button>
-              <button class="ref-hero-nav-arrow next" aria-label="Next Slide" data-action="next">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </button>
+              <!-- Floating Info Card Overlay -->
+              <div class="ref-hero-floating-card">
+                <div class="ref-hero-floating-card-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div class="ref-hero-floating-card-text">${slide.floatingCardText}</div>
+              </div>
+
+              <!-- Interactive Arrow Controls Overlay matching screenshot placement -->
+              <div class="ref-hero-arrows-overlay">
+                <button class="ref-hero-nav-arrow prev" aria-label="Previous Slide" data-action="prev">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                  </svg>
+                </button>
+                <button class="ref-hero-nav-arrow next" aria-label="Next Slide" data-action="next">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
