@@ -33,7 +33,6 @@ export const heroSlidesData = [
     ],
     taglineHtml: `<span class="ref-handwritten">Land for a Better Life</span>`,
     image: heroFarm,
-    imageTagline: 'Invest in a Healthier Tomorrow',
     floatingCardText: 'Nature Generates Wealth'
   },
   {
@@ -96,7 +95,6 @@ export const heroSlidesData = [
     ],
     taglineHtml: `<div class="ref-sub-line"><span class="sub-rule"></span><span class="sub-text">LAND BUILDS LEGACIES</span><span class="sub-rule"></span></div>`,
     image: heroPlots,
-    imageTagline: 'Land for Generations',
     floatingCardText: 'Strategic Locations Stronger Futures'
   },
   {
@@ -128,7 +126,6 @@ export const heroSlidesData = [
     ],
     taglineHtml: `<div class="ref-sub-line"><span class="sub-rule"></span><span class="sub-text">HOMES THAT GROW WITH YOU</span><span class="sub-rule"></span></div>`,
     image: heroApartments,
-    imageTagline: 'Live Better Every Day',
     floatingCardText: 'Sustainable Communities Stronger Tomorrows'
   }
 ];
