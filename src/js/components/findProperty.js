@@ -180,42 +180,14 @@ export function renderFindProperty() {
 
           </div>
 
-          <!-- RIGHT SIDE: Grand Entrance Property Visual & Stats -->
+          <!-- RIGHT SIDE: Grand Entrance Property Visual & Stats Card -->
           <div class="ref-find-right">
-            <div class="ref-find-visual-container">
-              <img src="/images/ref/find-prop.jpg" alt="VR Real Estates Entrance" class="ref-find-img" />
-              
-              <!-- Floating Glass Card -->
-              <div class="ref-find-glass-badge">
-                <div class="badge-leaf">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3B2B" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
-                </div>
-                <div class="badge-txt">
-                  <strong>More than Properties</strong>
-                  <span>We Build Better Lives</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Bottom Statistics & Cursive Element -->
-            <div class="ref-find-stats-row">
-              <div class="stat-col">
-                <div class="stat-num">10+</div>
-                <div class="stat-label">Projects</div>
-              </div>
-              <div class="stat-divider"></div>
-              <div class="stat-col">
-                <div class="stat-num">500+</div>
-                <div class="stat-label">Happy Families</div>
-              </div>
-              <div class="stat-divider"></div>
-              <div class="stat-col">
-                <div class="stat-num">3+</div>
-                <div class="stat-label">Cities</div>
-              </div>
-              <div class="stat-cursive">
-                <span class="ref-handwritten">Invest Today<br/>Live Better Tomorrow</span>
-              </div>
+            <div class="ref-find-card-wrapper">
+              <img 
+                src="/images/ref/find-prop-exact-card.png" 
+                alt="VR Real Estates - More than Properties We Build Better Lives" 
+                class="ref-find-card-img" 
+              />
             </div>
           </div>
 

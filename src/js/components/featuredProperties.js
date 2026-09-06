@@ -139,49 +139,15 @@ export function renderFeaturedProperties() {
           <button class="ref-filter-btn" data-filter="farmlands">Farm Lands</button>
         </div>
 
-        <!-- Project Cards Grid with Floating Nav Arrows -->
+        <!-- Project Cards Grid -->
         <div class="ref-projects-carousel-wrap">
-          <button class="ref-carousel-arrow prev" id="feat-prev-btn" aria-label="Previous Projects">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-          </button>
-
           <div class="ref-projects-grid" id="ref-projects-grid">
             ${cardsHtml}
           </div>
-
-          <button class="ref-carousel-arrow next" id="feat-next-btn" aria-label="Next Projects">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </button>
         </div>
 
 
-        <!-- View All Projects CTA -->
-        <div class="ref-projects-cta-row">
-          <a href="#/open-plots" class="ref-view-all-btn">
-            <span>View All Projects</span>
-            <span class="btn-arrow">&rarr;</span>
-          </a>
-        </div>
 
-        <!-- Bottom Architectural Skyline Flourish -->
-        <div class="ref-projects-bottom-flourish">
-          <div class="flourish-left">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A3B2B" stroke-width="1.8">
-              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-            </svg>
-            <span class="flourish-txt">INVEST IN SPACES THAT MATTER</span>
-            <span class="sub-rule"></span>
-          </div>
-
-          <div class="flourish-right">
-            <img src="/images/ref/skyline-gold.png" alt="City Skyline" class="flourish-skyline" onerror="this.style.display='none'" />
-            <span class="flourish-txt">BETTER PLACES &bull; BRIGHTER TOMORROWS</span>
-          </div>
-        </div>
       </div>
     </section>
   `;
@@ -190,9 +156,6 @@ export function renderFeaturedProperties() {
 export function initFeaturedProjects() {
   const filterBtns = document.querySelectorAll('.ref-filter-btn');
   const cards = document.querySelectorAll('.ref-project-card');
-  const prevBtn = document.getElementById('feat-prev-btn');
-  const nextBtn = document.getElementById('feat-next-btn');
-  const grid = document.getElementById('ref-projects-grid');
 
   if (!filterBtns.length) return;
 
@@ -212,13 +175,4 @@ export function initFeaturedProjects() {
       });
     });
   });
-
-  if (prevBtn && nextBtn && grid) {
-    prevBtn.addEventListener('click', () => {
-      grid.scrollBy({ left: -320, behavior: 'smooth' });
-    });
-    nextBtn.addEventListener('click', () => {
-      grid.scrollBy({ left: 320, behavior: 'smooth' });
-    });
-  }
 }

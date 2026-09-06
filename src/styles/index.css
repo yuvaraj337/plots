@@ -1433,19 +1433,24 @@ textarea {
    5. FIND YOUR PROPERTY SECTION
    ========================================================================== */
 .ref-find-section {
-  padding: 90px 0;
-  background: var(--c-cream-bg);
+  padding: 80px 0;
+  background: #F6F5F1;
   position: relative;
+  overflow: hidden;
 }
 
 .ref-find-split-wrap {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: 60px;
+  grid-template-columns: minmax(0, 470px) 1.2fr;
+  gap: 48px;
   align-items: center;
 }
 
 /* Left Form Column */
+.ref-find-left {
+  max-width: 470px;
+}
+
 .ref-find-eyebrow {
   display: flex;
   align-items: center;
@@ -1453,72 +1458,98 @@ textarea {
   margin-bottom: 12px;
 }
 
+.ref-find-eyebrow .eyebrow-text {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--c-green-deep);
+  text-transform: uppercase;
+}
+
+.ref-find-eyebrow .eyebrow-rule {
+  width: 36px;
+  height: 2px;
+  background: var(--c-gold);
+  border-radius: 1px;
+}
+
 .ref-find-title {
   font-family: var(--font-serif);
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 16px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.ref-find-title .headline-green {
+  color: var(--c-green-deep);
+}
+
+.ref-find-title .headline-gold {
+  color: var(--c-gold);
 }
 
 .ref-find-desc {
-  font-size: 1.05rem;
-  color: var(--c-text-muted);
-  line-height: 1.6;
-  margin-bottom: 28px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: #64746A;
+  line-height: 1.55;
+  margin-bottom: 22px;
 }
 
 /* Property Type Selector Buttons */
 .ref-find-type-selector {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .find-type-btn {
   background: #ffffff;
   border: 1.5px solid #E5E0D5;
   border-radius: 12px;
-  padding: 14px 8px;
+  padding: 12px 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: #4B5563;
-  font-size: 0.85rem;
+  gap: 6px;
+  color: var(--c-green-deep);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
   font-weight: 700;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .find-type-btn svg {
-  color: var(--c-gold);
+  color: var(--c-green-deep);
+  transition: transform 0.2s ease;
 }
 
 .find-type-btn:hover {
   border-color: var(--c-green-deep);
-  color: var(--c-green-deep);
   transform: translateY(-2px);
 }
 
 .find-type-btn.active {
-  background: var(--c-green-deep);
-  border-color: var(--c-green-deep);
-  color: #ffffff;
-  box-shadow: 0 4px 16px rgba(26, 59, 43, 0.2);
+  background: #EFF5F1;
+  border: 2px solid var(--c-green-deep);
+  color: var(--c-green-deep);
+  box-shadow: 0 2px 8px rgba(26, 59, 43, 0.1);
 }
 
 .find-type-btn.active svg {
-  color: #ffffff;
+  color: var(--c-green-deep);
 }
 
 /* 2x2 Form Dropdowns */
 .ref-find-fields-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-  margin-bottom: 24px;
+  gap: 14px;
+  margin-bottom: 16px;
 }
 
 .ref-field-group {
@@ -1531,13 +1562,14 @@ textarea {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.82rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
   font-weight: 700;
-  color: #374151;
+  color: var(--c-green-deep);
 }
 
 .field-label svg {
-  color: var(--c-gold);
+  color: var(--c-green-deep);
 }
 
 .ref-select-wrap {
@@ -1548,11 +1580,12 @@ textarea {
   width: 100%;
   appearance: none;
   background: #ffffff;
-  border: 1.5px solid #E0DAD0;
+  border: 1.5px solid #E2DDD4;
   border-radius: 10px;
-  padding: 12px 36px 12px 14px;
-  font-size: 0.92rem;
-  color: #1F2937;
+  padding: 11px 34px 11px 12px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: #2C3E35;
   font-weight: 500;
   outline: none;
   transition: all 0.2s ease;
@@ -1561,40 +1594,79 @@ textarea {
 
 .ref-select:focus {
   border-color: var(--c-green-deep);
-  box-shadow: 0 0 0 3px rgba(26, 59, 43, 0.1);
+  box-shadow: 0 0 0 3px rgba(26, 59, 43, 0.08);
 }
 
 .select-arrow {
   position: absolute;
-  right: 14px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  color: #9CA3AF;
-  font-size: 0.8rem;
+  color: #718278;
+  font-size: 0.75rem;
 }
 
+/* Submit Button */
 .ref-find-submit-btn {
   width: 100%;
   background: var(--c-green-deep);
   color: #ffffff;
-  font-size: 1.05rem;
-  font-weight: 700;
-  padding: 15px;
-  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 13px 20px;
+  border-radius: 10px;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 18px rgba(26, 59, 43, 0.25);
-  margin-bottom: 24px;
+  box-shadow: 0 4px 14px rgba(26, 59, 43, 0.2);
+  margin-bottom: 16px;
+  cursor: pointer;
 }
 
 .ref-find-submit-btn:hover {
   background: var(--c-green-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(26, 59, 43, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(26, 59, 43, 0.3);
+}
+
+.ref-find-submit-btn .btn-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.ref-find-submit-btn:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Tagline Flourish */
+.ref-find-tagline-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.ref-find-tagline-wrap .sub-rule {
+  width: 32px;
+  height: 1.5px;
+  background: var(--c-gold);
+  border-radius: 1px;
+}
+
+.ref-find-tagline-wrap .sub-text {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: #7A8B80;
+  text-transform: uppercase;
 }
 
 /* 4 Benefits Row */
@@ -1602,121 +1674,60 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 18px;
-  border-top: 1px solid #E8E3D8;
+  gap: 8px;
 }
 
-.ref-find-benefit-item {
+.find-benefit {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--c-green-deep);
+  gap: 8px;
 }
 
-.benefit-check-icon {
-  width: 18px;
-  height: 18px;
+.benefit-circle {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: var(--c-green-tint);
+  background: #ffffff;
+  border: 1.5px solid #E2DDD4;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
   color: var(--c-green-deep);
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
-/* Right Column: Visual Frame with Arch */
+.find-benefit span {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #2C3E35;
+  line-height: 1.2;
+}
+
+/* Right Column: Visual Property & Stats Seamless Display */
 .ref-find-right {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.ref-find-visual-frame {
+.ref-find-card-wrapper {
   position: relative;
   width: 100%;
-  max-width: 480px;
-  border-radius: 180px 40px 40px 40px;
-  /* Reference screenshot distinctive curved arch */
-  overflow: hidden;
-  box-shadow: 0 20px 45px rgba(26, 59, 43, 0.15);
-  background: #E8EDE8;
-}
-
-.find-visual-img {
-  width: 100%;
-  height: 480px;
-  object-fit: cover;
-}
-
-/* Floating Glass Badge Card */
-.ref-find-floating-card {
-  position: absolute;
-  top: 24px;
-  left: -20px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 14px;
-  padding: 12px 18px;
-  box-shadow: var(--shadow-floating);
-  max-width: 240px;
+  max-width: 660px;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.glass-badge-tag {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--c-gold);
-}
-
-.glass-badge-text {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--c-green-deep);
-  line-height: 1.25;
-}
-
-/* Stats Row */
-.ref-find-stats-row {
-  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-around;
-  background: #ffffff;
-  padding: 16px 20px;
-  border-top: 1px solid #ECE7DE;
 }
 
-.ref-stat-block {
-  text-align: center;
-}
-
-.stat-num {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--c-green-deep);
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--c-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Bottom Cursive Script under Right Side */
-.ref-find-cursive-wrap {
-  text-align: center;
-  margin-top: 14px;
+.ref-find-card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: none;
+  box-shadow: none;
 }
 
 /* ==========================================================================
@@ -3137,9 +3148,8 @@ body {
     box-sizing: border-box;
   }
 
-  .ref-find-visual-frame,
-  .find-visual-img {
-    height: 260px;
+  .ref-find-card-wrapper {
+    max-width: 100%;
   }
 
   .ref-find-benefits-row {
@@ -3284,10 +3294,7 @@ body {
     height: 36px;
   }
 
-  .ref-find-visual-frame,
-  .find-visual-img {
-    height: 240px;
-  }
+
 }
 
 /* Floating Action Buttons */

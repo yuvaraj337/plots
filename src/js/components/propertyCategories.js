@@ -99,21 +99,6 @@ export function renderPropertyCategories() {
         <div class="ref-explore-grid">
           ${cardsHtml}
         </div>
-
-        <!-- Bottom Flourish -->
-        <div class="ref-explore-bottom-flourish">
-          <div class="flourish-center">
-            <span class="sub-rule"></span>
-            <span class="sub-text">INVEST TODAY &nbsp; GROW TOMORROW</span>
-            <span class="sub-rule"></span>
-          </div>
-          <div class="flourish-right">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A3B2B" stroke-width="1.8">
-              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-            </svg>
-            <span class="ref-handwritten">Land for a Brighter Tomorrow</span>
-          </div>
-        </div>
       </div>
     </section>
   `;
