@@ -58,6 +58,14 @@ function router() {
     return;
   }
 
+  // Dynamic apartments journey route: /apartments/...
+  if (cleanPath.startsWith('/apartments')) {
+    const page = renderApartmentsPage(cleanPath);
+    appEl.innerHTML = page.html;
+    if (page.init) page.init();
+    return;
+  }
+
   // Dynamic property route: /property/:id
   if (cleanPath.startsWith('/property/')) {
     const propId = cleanPath.replace('/property/', '');
