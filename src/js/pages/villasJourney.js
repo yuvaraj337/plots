@@ -5,6 +5,7 @@
 
 import { renderHeader, initStickyNav } from '../components/header.js';
 import { renderFooter, initScrollTop } from '../components/footer.js';
+import { renderMasterPlanSvgCode, initVillaMasterPlan } from '../components/villaMasterPlan.js';
 
 /* ═══════════════════ APPLICATION STATE ═══════════════════ */
 let selectedFilter = 'all';
@@ -145,23 +146,23 @@ const villasProjectsData = [
 
 const villaPlotsLayout = [
   // Top row
-  { id: 'v01', label: 'V01', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
-  { id: 'v02', label: 'V02', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
-  { id: 'v03', label: 'V03', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
-  { id: 'v04', label: 'V04', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
-  { id: 'v05', label: 'V05', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
+  { id: 'v01', label: 'V01', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'East Facing', road: '30 ft Road' },
+  { id: 'v02', label: 'V02', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'East Facing', road: '30 ft Road' },
+  { id: 'v03', label: 'V03', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'East Facing', road: '30 ft Road' },
+  { id: 'v04', label: 'V04', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'East Facing', road: '30 ft Road' },
+  { id: 'v05', label: 'V05', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'East Facing', road: '30 ft Road' },
   // Middle row
-  { id: 'v06', label: 'V06', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
-  { id: 'v07', label: 'V07', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
-  { id: 'v08', label: 'V08', status: 'on-hold', isFeatured: true, bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
-  { id: 'v09', label: 'V09', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
-  { id: 'v10', label: 'V10', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr' },
+  { id: 'v06', label: 'V06', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'West Facing', road: '30 ft Road' },
+  { id: 'v07', label: 'V07', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'West Facing', road: '30 ft Road' },
+  { id: 'v08', label: 'V08', status: 'booked', isFeatured: true, bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'West Facing', road: '30 ft Road' },
+  { id: 'v09', label: 'V09', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'West Facing', road: '30 ft Road' },
+  { id: 'v10', label: 'V10', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'West Facing', road: '30 ft Road' },
   // Bottom row
-  { id: 'v11', label: 'V11', status: 'available', bhk: '3 BHK', area: '2800 Sq.Ft', price: '₹ 2.20 Cr' },
-  { id: 'v12', label: 'V12', status: 'available', bhk: '3 BHK', area: '2800 Sq.Ft', price: '₹ 2.20 Cr' },
-  { id: 'v13', label: 'V13', status: 'available', bhk: '3 BHK', area: '2800 Sq.Ft', price: '₹ 2.20 Cr' },
-  { id: 'v14', label: 'V14', status: 'available', bhk: '3 BHK', area: '2800 Sq.Ft', price: '₹ 2.20 Cr' },
-  { id: 'v15', label: 'V15', status: 'available', bhk: '3 BHK', area: '2800 Sq.Ft', price: '₹ 2.20 Cr' }
+  { id: 'v11', label: 'V11', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'North Facing', road: '30 ft Road' },
+  { id: 'v12', label: 'V12', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'North Facing', road: '30 ft Road' },
+  { id: 'v13', label: 'V13', status: 'sold', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'North Facing', road: '30 ft Road' },
+  { id: 'v14', label: 'V14', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'North Facing', road: '30 ft Road' },
+  { id: 'v15', label: 'V15', status: 'available', bhk: '4 BHK', area: '3200 Sq.Ft', price: '₹ 2.50 Cr', facing: 'North Facing', road: '30 ft Road' }
 ];
 
 const villaCategories = [
@@ -535,48 +536,10 @@ function renderScreenOverview(projectId = 'vr-green-villas') {
 }
 
 /* ═════════════════════════════════════════════════════════
-   STEP 3 — MASTER LAYOUT PLAN
+   STEP 3 — 3D MASTER LAYOUT PLAN
    ═════════════════════════════════════════════════════════ */
 function renderScreenLayout() {
-  // Plot Hotspots relative coordinates over the master plan map
-  // Top row: V01 to V05
-  // Middle row: V06 to V10
-  // Bottom row: V11 to V15
-  const plotUnitsHtml = villaPlotsLayout.map((plot, idx) => {
-    let row = 0;
-    let col = 0;
-    if (idx < 5) {
-      row = 0;
-      col = idx;
-    } else if (idx < 10) {
-      row = 1;
-      col = idx - 5;
-    } else {
-      row = 2;
-      col = idx - 10;
-    }
-
-    // Proportional positioning matching reference grid
-    const leftPct = 10.5 + col * 13.8;
-    const topPct = row === 0 ? 19.5 : (row === 1 ? 44.5 : 69.5);
-    const widthPct = 12.0;
-    const heightPct = 18.0;
-
-    const isOnHold = plot.status === 'on-hold';
-    const isBooked = plot.status === 'booked';
-    const clickAttr = isBooked ? '' : `onclick="window._villaNav('/villas/vr-green-villas/villa/${plot.id}')"`;
-
-    return `
-      <div 
-        class="villas-plot-unit ${isOnHold ? 'on-hold' : ''} ${isBooked ? 'booked' : ''}" 
-        style="left: ${leftPct}%; top: ${topPct}%; width: ${widthPct}%; height: ${heightPct}%;"
-        ${clickAttr}
-        title="${plot.label} - ${plot.bhk} (${plot.status === 'on-hold' ? 'On Hold' : 'Available'})"
-      >
-        <span>${plot.label}</span>
-      </div>
-    `;
-  }).join('');
+  const isDev = typeof window !== 'undefined' && (window.location.search.includes('dev=true') || window._enableMasterPlanDev);
 
   return `
     <div class="villas-layout-page">
@@ -587,47 +550,105 @@ function renderScreenLayout() {
           <span class="sep">&gt;</span>
           <a href="#/villas/vr-green-villas">VR Green Villas</a>
           <span class="sep">&gt;</span>
-          <span class="current">Villa Layout</span>
+          <span class="current">Master Layout Plan</span>
         </nav>
 
         <!-- Master Layout Card -->
         <div class="villas-layout-card">
           <div class="villas-layout-header">
-            <h1 class="villas-layout-title">Master Layout Plan</h1>
+            <div>
+              <h1 class="villas-layout-title">Master Layout Plan</h1>
+              <div class="villas-layout-sub">VR Green Villas &bull; 3D Gated Community Plan</div>
+            </div>
+            ${isDev ? `
+              <div class="vmp-dev-badge" style="background: #FEF3C7; color: #92400E; font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px dashed #D97706;">
+                🛠️ Dev Test Mode Active
+              </div>
+            ` : ''}
           </div>
 
-          <!-- Interactive Map Container -->
-          <div class="villas-map-container" id="villas-map-canvas">
-            <img src="/images/villas/master-layout-grid.png" alt="VR Green Villas Master Layout" class="villas-map-bg-img" />
-            ${plotUnitsHtml}
-          </div>
-
-          <!-- Legend & Compass Footer -->
-          <div class="villas-layout-footer">
-            <div class="villas-legend-items">
-              <div class="villas-legend-item">
-                <span class="villas-dot available"></span>
+          <!-- Top Legend & Zoom Controls Bar -->
+          <div class="vmp-top-bar">
+            <div class="vmp-legend-bar">
+              <div class="vmp-legend-item">
+                <span class="vmp-legend-dot available"></span>
                 <span>Available</span>
               </div>
-              <div class="villas-legend-item">
-                <span class="villas-dot booked"></span>
+              <div class="vmp-legend-item">
+                <span class="vmp-legend-dot booked"></span>
                 <span>Booked</span>
               </div>
-              <div class="villas-legend-item">
-                <span class="villas-dot on-hold"></span>
-                <span>On Hold</span>
+              <div class="vmp-legend-item">
+                <span class="vmp-legend-dot sold"></span>
+                <span>Sold</span>
               </div>
             </div>
 
-            <!-- Compass Indicator -->
-            <div class="villas-compass">
+            <div class="vmp-controls-bar">
+              <button type="button" class="vmp-zoom-btn" id="vmp-zoom-in" title="Zoom In">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+              <button type="button" class="vmp-zoom-btn" id="vmp-zoom-out" title="Zoom Out">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/></svg>
+              </button>
+              <button type="button" class="vmp-zoom-btn" id="vmp-zoom-reset" title="Reset View">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive 3D Vector Map Canvas Stage -->
+          <div class="vmp-stage-wrapper">
+            <div class="vmp-canvas-scroll" id="vmp-canvas-scroll">
+              <div class="vmp-canvas-wrap" id="vmp-canvas-wrap">
+                <div id="vmp-canvas-container" style="width: 100%;">
+                  ${renderMasterPlanSvgCode(villaPlotsLayout, 'v02')}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Host for Clicked Villa Details -->
+          <div id="vmp-modal-host"></div>
+
+          <!-- Footer / Orientation -->
+          <div class="villas-layout-footer">
+            <div style="font-size: 0.88rem; color: #6B7280; font-weight: 500;">
+              Click any villa on the master plan to inspect unit specifications.
+            </div>
+
+            <div class="villas-compass" title="Orientation: North">
               <span style="font-size: 0.9rem; font-weight: 800;">N</span>
               <svg width="18" height="24" viewBox="0 0 24 32" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 2L4 28l8-6 8 6L12 2z" fill="#11291E"></path>
               </svg>
             </div>
           </div>
+
+          <!-- Development-only Status Tester Panel -->
+          ${renderDevTesterHtml(isDev)}
+
         </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderDevTesterHtml(isDev) {
+  return `
+    <div class="vmp-dev-tester" id="vmp-dev-tester" style="${isDev ? 'display: block;' : 'display: none;'}">
+      <div class="vmp-dev-header">
+        <span>🛠️ Development Status Switcher (Test Suite)</span>
+        <span style="font-size: 0.78rem; font-weight: 500; color: #78350F;">Live DOM & Data Source Tester</span>
+      </div>
+      <div class="vmp-dev-grid">
+        <label for="vmp-dev-plot-select" style="font-weight: 700; color: #78350F;">Select Villa:</label>
+        <select id="vmp-dev-plot-select" class="vmp-dev-select">
+          ${villaPlotsLayout.map(p => `<option value="${p.id}">${p.label} (Current: ${p.status})</option>`).join('')}
+        </select>
+        <button type="button" class="vmp-dev-btn avail" onclick="window._handleDevStatusChange('available')">Set Available (Green)</button>
+        <button type="button" class="vmp-dev-btn booked" onclick="window._handleDevStatusChange('booked')">Set Booked (Orange)</button>
+        <button type="button" class="vmp-dev-btn sold" onclick="window._handleDevStatusChange('sold')">Set Sold (Red)</button>
       </div>
     </div>
   `;
@@ -1166,6 +1187,18 @@ function attachVillasEvents(screen) {
         }
       });
     }
+  }
+
+  if (screen === 'layout') {
+    const currentProject = villasProjectsData.find(p => p.id === 'vr-green-villas') || villasProjectsData[0];
+    initVillaMasterPlan(villaPlotsLayout, currentProject);
+
+    window._handleDevStatusChange = function(status) {
+      const select = document.getElementById('vmp-dev-plot-select');
+      if (!select) return;
+      const villaId = select.value;
+      window._setVillaStatusDev(villaId, status);
+    };
   }
 
   // Global methods for gallery in details screen
