@@ -342,7 +342,7 @@ export const projectDetailsData = {
       },
       {
             "id": "P18",
-            "num": "P118",
+            "num": "P18",
             "mapLabel": "P18",
             "size": 200,
             "dim": "30 \u00d7 60 ft",
