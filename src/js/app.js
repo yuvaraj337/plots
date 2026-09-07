@@ -3,6 +3,8 @@ import { renderOpenPlotsPage } from './pages/openPlots.js';
 import { renderPropertyDetailPage } from './pages/propertyDetail.js';
 import { renderProjectDetail } from './pages/projectDetailEngine.js';
 import { renderApartmentsPage } from './pages/apartmentsJourney.js';
+import { renderVillasPage } from './pages/villasJourney.js';
+import { renderFarmlandsPage } from './pages/farmlandsJourney.js';
 import {
   renderAboutPage,
   renderServicesPage,
@@ -19,14 +21,14 @@ const routes = {
   '/': renderHomePage,
   '/open-plots': () => renderProjectDetail('vr-green-meadows'),
   '/open-plots.html': () => renderProjectDetail('vr-green-meadows'),
-  '/villas': () => renderProjectDetail('vr-green-meadows'),
+  '/villas': () => renderVillasPage('/villas'),
   '/vr-green-meadows': () => renderProjectDetail('vr-green-meadows'),
   '/vr-prime-meadows': () => renderProjectDetail('vr-green-meadows'),
   '/amodha': () => renderProjectDetail('vr-green-meadows'),
   '/amodha.html': () => renderProjectDetail('vr-green-meadows'),
   '/apartments': () => renderApartmentsPage('listing'),
   '/vr-elite-towers': () => renderApartmentsPage('overview'),
-  '/vr-green-villas': () => renderProjectDetail('vr-green-villas'),
+  '/vr-green-villas': () => renderVillasPage('/villas/vr-green-villas'),
   '/vr-heights': () => renderProjectDetail('vr-heights'),
   '/vr-agro-lands': () => renderProjectDetail('vr-agro-lands'),
   '/about': renderAboutPage,
@@ -34,7 +36,7 @@ const routes = {
   '/resources': renderResourcesPage,
   '/media': renderMediaPage,
   '/contact': renderContactPage,
-  '/farmlands': () => renderCategoryListingPage('farmlands'),
+  '/farmlands': () => renderFarmlandsPage('/farmlands'),
 };
 
 function router() {
@@ -61,6 +63,22 @@ function router() {
   // Dynamic apartments journey route: /apartments/...
   if (cleanPath.startsWith('/apartments')) {
     const page = renderApartmentsPage(cleanPath);
+    appEl.innerHTML = page.html;
+    if (page.init) page.init();
+    return;
+  }
+
+  // Dynamic villas journey route: /villas/...
+  if (cleanPath.startsWith('/villas')) {
+    const page = renderVillasPage(cleanPath);
+    appEl.innerHTML = page.html;
+    if (page.init) page.init();
+    return;
+  }
+
+  // Dynamic farmlands journey route: /farmlands/...
+  if (cleanPath.startsWith('/farmlands')) {
+    const page = renderFarmlandsPage(cleanPath);
     appEl.innerHTML = page.html;
     if (page.init) page.init();
     return;
