@@ -1697,3 +1697,31 @@
     padding: 4px 10px;
   }
 }
+
+/* ==========================================================================
+   PLOT ENQUIRY MODAL OVERLAY (Matches Villas Send Enquiry Layout)
+   ========================================================================== */
+.plot-enquiry-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 41, 30, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  animation: plotFadeIn 0.2s ease-out forwards;
+}
+
+@keyframes plotFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes plotScaleIn {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}

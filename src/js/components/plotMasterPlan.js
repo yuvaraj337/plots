@@ -665,8 +665,8 @@ export function renderPlotDetailsContent(plot, projectName, isFullscreen = false
     statusBadgeClass = 'status-badge available';
     statusIcon = '✓';
     actionButtonsHtml = `
-      <button type="button" class="pd-btn primary-choose" onclick="window.openPlotSiteVisit('${plot.id}')">
-        <span>Choose This Plot</span>
+      <button type="button" class="pd-btn primary-choose" onclick="window.openPlotEnquiry('${plot.id}')">
+        <span>Send Enquiry</span>
         <span class="btn-arrow">&rarr;</span>
       </button>
 
@@ -684,7 +684,7 @@ export function renderPlotDetailsContent(plot, projectName, isFullscreen = false
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span>This plot is currently booked. You may inquire for cancellation waitlist.</span>
       </div>
-      <button type="button" class="pd-btn secondary-visit" onclick="window.openSiteVisitModal('${projectName} - Plot ${plot.num} Waitlist')">
+      <button type="button" class="pd-btn secondary-visit" onclick="window.openPlotEnquiry('${plot.id}')">
         <span>Inquire for Waitlist</span>
       </button>
     `;
@@ -818,6 +818,180 @@ export function initPlotMasterPlan(project) {
   const plots = project.plots || [];
   let currentZoom = 1;
   let currentFsZoom = 1;
+
+  // Send Enquiry Handler matching Villas Send Enquiry screen & flow
+  window.openPlotEnquiry = function(plotId) {
+    const plot = (plots || []).find(p => p.id === plotId) || plots[0];
+    if (!plot) return;
+
+    if (plot.status === 'sold') {
+      alert('This plot has been sold and is no longer available for enquiry.');
+      return;
+    }
+
+    const modalContainer = document.getElementById('modal-container');
+    if (!modalContainer) return;
+
+    const today = new Date();
+    const defaultDateStr = today.toISOString().split('T')[0];
+
+    modalContainer.innerHTML = `
+      <div class="plot-enquiry-overlay" id="plot-enquiry-overlay">
+        <div class="villas-form-card" style="margin: 0; max-height: 90vh; overflow-y: auto; width: 100%; max-width: 520px; animation: plotScaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div class="villas-form-header">
+            <h1 class="villas-form-title">Send Enquiry</h1>
+            <button type="button" class="villas-btn-close" onclick="window.closePlotEnquiry()" aria-label="Close form">
+              &times;
+            </button>
+          </div>
+          <p class="villas-form-subtitle">Get in touch with our team. We will call you shortly.</p>
+
+          <form id="plot-enquiry-form" onsubmit="window.submitPlotEnquiry(event, '${plot.id}')">
+            <div class="villas-form-group">
+              <label class="villas-form-label">Full Name <span class="req">*</span></label>
+              <input type="text" class="villas-input" id="plot-enquiry-name" placeholder="Enter your name" required />
+            </div>
+
+            <div class="villas-form-group">
+              <label class="villas-form-label">Mobile Number <span class="req">*</span></label>
+              <input type="tel" class="villas-input" id="plot-enquiry-phone" placeholder="Enter mobile number" required />
+            </div>
+
+            <div class="villas-form-group">
+              <label class="villas-form-label">Email</label>
+              <input type="email" class="villas-input" id="plot-enquiry-email" placeholder="Enter your email" />
+            </div>
+
+            <div class="villas-form-group">
+              <label class="villas-form-label">Preferred Date</label>
+              <input type="date" class="villas-input" id="plot-enquiry-date" value="${defaultDateStr}" />
+            </div>
+
+            <div class="villas-form-group">
+              <label class="villas-form-label">Message (Optional)</label>
+              <textarea class="villas-textarea" id="plot-enquiry-message" rows="3" placeholder="I am interested in Plot ${plot.num}..."></textarea>
+            </div>
+
+            <!-- Selected Property Card (Corresponds directly to selected plot) -->
+            <div class="villas-selected-prop-card">
+              <img src="/images/journey/gallery_entrance.jpg" alt="Plot ${plot.num}" class="villas-selected-prop-thumb" />
+              <div class="villas-selected-prop-meta">
+                <div class="villas-selected-prop-eyebrow">Selected Property</div>
+                <div class="villas-selected-prop-name">Plot ${plot.num} &bull; ${plot.size} Sq.Yds</div>
+                <div class="villas-selected-prop-loc">${project.name || 'VR Green Meadows'}, Shadnagar</div>
+                <div class="villas-selected-prop-price">${plot.price} <span style="font-size:0.8rem; font-weight:normal; color:#6B7280;">(${plot.rate})</span></div>
+              </div>
+            </div>
+
+            <!-- Consent Checkboxes -->
+            <div class="villas-consent-group">
+              <label class="villas-checkbox-label">
+                <input type="checkbox" id="plot-enquiry-whatsapp" checked />
+                <span>I agree to be contacted via call/WhatsApp</span>
+              </label>
+              <label class="villas-checkbox-label">
+                <input type="checkbox" id="plot-enquiry-terms" checked required />
+                <span>I accept the Terms &amp; Privacy Policy</span>
+              </label>
+            </div>
+
+            <button type="submit" class="villas-btn-primary" style="width: 100%;">
+              Submit Enquiry
+            </button>
+          </form>
+        </div>
+      </div>
+    `;
+
+    const overlay = document.getElementById('plot-enquiry-overlay');
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        window.closePlotEnquiry();
+      }
+    });
+  };
+
+  window.closePlotEnquiry = function() {
+    const modalContainer = document.getElementById('modal-container');
+    if (modalContainer) modalContainer.innerHTML = '';
+  };
+
+  window.submitPlotEnquiry = function(event, plotId) {
+    if (event) event.preventDefault();
+    const plot = (plots || []).find(p => p.id === plotId) || plots[0];
+    const modalContainer = document.getElementById('modal-container');
+    if (!modalContainer) return;
+
+    modalContainer.innerHTML = `
+      <div class="plot-enquiry-overlay" id="plot-enquiry-overlay">
+        <div class="villas-success-card" style="margin: 0; max-height: 90vh; overflow-y: auto; width: 100%; max-width: 480px; animation: plotScaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);">
+          <!-- Big Mint Checkmark Icon -->
+          <div class="villas-success-checkmark-wrap">
+            <div class="villas-success-check-inner">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <h1 class="villas-success-title">Enquiry Submitted!</h1>
+          <p class="villas-success-sub">
+            Thank you for your interest in <strong>Plot ${plot ? plot.num : ''}</strong>.<br />
+            Our team will contact you shortly.
+          </p>
+
+          <!-- What Happens Next 3 Steps Box -->
+          <div class="villas-next-steps-box">
+            <div class="villas-next-steps-title">What happens next?</div>
+            
+            <div class="villas-step-row">
+              <div class="villas-step-icon-circle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+              </div>
+              <div class="villas-step-content">
+                <span class="villas-step-num">1</span> Our team will review your details.
+              </div>
+            </div>
+
+            <div class="villas-step-row">
+              <div class="villas-step-icon-circle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div class="villas-step-content">
+                <span class="villas-step-num">2</span> You will receive a call from our sales team.
+              </div>
+            </div>
+
+            <div class="villas-step-row">
+              <div class="villas-step-icon-circle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+              </div>
+              <div class="villas-step-content">
+                <span class="villas-step-num">3</span> Get ready to explore your dream plot!
+              </div>
+            </div>
+          </div>
+
+          <!-- Back to Master Plan Button -->
+          <button type="button" class="villas-btn-back-project" onclick="window.closePlotEnquiry()" style="margin-top: 18px; width: 100%;">
+            Back to Master Plan
+          </button>
+
+          <!-- Bottom Artwork -->
+          <div class="villas-success-artwork-wrap">
+            <img src="/images/villas/success-illustration.png" alt="Your Dream Property is Just a Step Away!" class="villas-success-art-img" />
+          </div>
+        </div>
+      </div>
+    `;
+
+    const overlay = document.getElementById('plot-enquiry-overlay');
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        window.closePlotEnquiry();
+      }
+    });
+  };
 
   // Strict Booking Protection
   window.openPlotSiteVisit = function(plotId) {
