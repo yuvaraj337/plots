@@ -617,306 +617,188 @@
 .legend-item .dot.sold { background: #9CA3AF; }
 
 /* ==========================================================================
-   INTERACTIVE 3D ARCHITECTURAL FLOOR PLAN COMPONENT STYLES
+   10,000% EXACT ARCHITECTURAL FLOOR PLAN STYLES
    ========================================================================== */
-.apt-ref-fp-stage-card {
+.afp-stage-wrap {
+  width: 100%;
+}
+
+.afp-stage-card {
   position: relative;
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #EAEAEA;
   border-radius: 20px;
-  padding: 24px 20px 24px 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  padding: 40px 32px 28px 32px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
+  text-align: center;
 }
 
-.afp-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Top Floor Plan Stage Header & Controls */
-.afp-top-controls-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #F3F4F6;
-}
-
-.afp-stage-title-wrap {
-  text-align: left;
-}
-
-.afp-stage-eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #059669;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  display: block;
-}
-
-.afp-stage-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #11291E;
-  margin: 2px 0 0 0;
-}
-
-/* Floating Zoom & Map Controls */
-.afp-zoom-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.afp-ctrl-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  border: 1px solid #D1D5DB;
-  background: #FFFFFF;
-  color: #374151;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.afp-ctrl-btn:hover {
-  background: #F9FAFB;
-  border-color: #11291E;
-  color: #11291E;
-}
-
-/* Viewport Stage */
-.afp-viewport {
+.afp-render-container {
   position: relative;
-  width: 100%;
-  background: #FAF9F6;
-  border: 1px solid #EAE7E0;
-  border-radius: 16px;
-  overflow: hidden;
-  min-height: 480px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Orientation Compass */
-.afp-compass {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #D1D5DB;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  z-index: 5;
-  pointer-events: none;
-}
-
-.afp-compass .c-n {
-  font-size: 0.7rem;
-  font-weight: 800;
-  color: #11291E;
-  line-height: 1;
-}
-
-.afp-compass .c-arrow {
-  font-size: 0.9rem;
-  font-weight: 900;
-  color: #DC2626;
-  line-height: 1;
-}
-
-.afp-canvas-scroll {
-  width: 100%;
-  overflow: auto;
-  padding: 20px 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.afp-canvas-transform {
   width: 100%;
   max-width: 820px;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-origin: center center;
+  margin: 0 auto;
 }
 
-.afp-architectural-svg {
+.afp-render-img {
   width: 100%;
   height: auto;
   display: block;
   user-select: none;
+  -webkit-user-drag: none;
 }
 
-/* Interactive SVG Group Hover / Focus */
-.afp-unit-group {
-  transition: filter 0.2s ease, transform 0.2s ease;
+.afp-interactive-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-.afp-unit-group:hover .afp-unit-overlay-rect {
-  fill: rgba(26, 59, 43, 0.12);
+/* Interactive Unit Floor Zones & Dynamic Status Tints */
+.afp-unit-zone {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  z-index: 2;
 }
 
-.afp-unit-group.status-on_hold:hover .afp-unit-overlay-rect {
-  fill: rgba(217, 119, 6, 0.28);
+.afp-unit-zone:hover {
+  background: rgba(26, 59, 43, 0.12);
 }
 
-.afp-unit-group.status-booked:hover .afp-unit-overlay-rect {
-  fill: rgba(220, 38, 38, 0.24);
+.afp-unit-zone.status-hold {
+  background: rgba(245, 158, 11, 0.26);
+  mix-blend-mode: multiply;
+  border: 1px dashed rgba(245, 158, 11, 0.8);
 }
 
-.afp-unit-group.status-sold {
-  opacity: 0.65;
-  cursor: not-allowed !important;
+.afp-unit-zone.status-booked {
+  background: rgba(239, 68, 68, 0.22);
+  mix-blend-mode: multiply;
+  border: 1px dashed rgba(239, 68, 68, 0.8);
 }
 
-.afp-unit-group.status-sold:hover .afp-unit-overlay-rect {
-  fill: rgba(107, 114, 128, 0.35);
+.afp-unit-zone.status-sold {
+  background: rgba(107, 114, 128, 0.3);
+  mix-blend-mode: multiply;
+  cursor: not-allowed;
 }
 
 /* Floating Badges */
-.afp-badge-group {
-  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+.afp-unit-badge {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  min-width: 66px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+  z-index: 6;
+  text-decoration: none;
 }
 
-.afp-badge-group:hover {
-  transform: scale(1.06);
+.afp-unit-badge:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
 }
 
-.afp-badge-card {
-  transition: stroke 0.15s ease, fill 0.15s ease, filter 0.15s ease;
+.afp-unit-badge.badge-available {
+  background: #FFFFFF;
+  border-color: #E2E8F0;
 }
 
-.afp-bottom-bar {
-  padding-top: 8px;
+.afp-unit-badge.badge-hold {
+  background: #FEE79A;
+  border: 1.5px solid #F59E0B;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+}
+
+.afp-unit-badge.badge-booked {
+  background: #FEE2E2;
+  border: 1.5px solid #EF4444;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
+}
+
+.afp-unit-badge.badge-sold {
+  background: #F3F4F6;
+  border: 1.5px solid #9CA3AF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: not-allowed;
+}
+
+.afp-badge-num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.15;
+}
+
+.afp-badge-type {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #4B5563;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+.afp-unit-badge.badge-hold .afp-badge-num {
+  color: #78350F;
+}
+
+.afp-unit-badge.badge-hold .afp-badge-type {
+  color: #92400E;
+}
+
+.afp-unit-badge.badge-booked .afp-badge-num {
+  color: #991B1B;
+}
+
+.afp-unit-badge.badge-booked .afp-badge-type {
+  color: #DC2626;
+}
+
+.afp-unit-badge.badge-sold .afp-badge-num {
+  color: #4B5563;
+}
+
+.afp-unit-badge.badge-sold .afp-badge-type {
+  color: #6B7280;
+}
+
+.afp-bottom-caption {
+  margin-top: 22px;
+  font-size: 14px;
+  color: #6B7280;
+  font-weight: 500;
   text-align: center;
 }
 
-.afp-hint-text {
-  font-size: 0.88rem;
-  color: #6B7280;
-  font-weight: 500;
-}
-
-/* ==========================================================================
-   FULLSCREEN MODAL OVERLAY
-   ========================================================================== */
-.afp-fs-overlay {
-  position: fixed;
-  inset: 0;
-  background: #FFFFFF;
-  z-index: 999999;
-  display: flex;
-  flex-direction: column;
-}
-
-.afp-fs-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  background: #11291E;
-  color: #FFFFFF;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.afp-fs-close-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.15);
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.afp-fs-close-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-.afp-fs-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-}
-
-.afp-fs-legend {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  font-size: 0.85rem;
-}
-
-.afp-fs-legend .legend-item {
-  color: #E5E7EB;
-}
-
-.afp-fs-body {
-  flex: 1;
-  position: relative;
-  background: #FAF9F6;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.afp-fs-controls {
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  display: flex;
-  gap: 8px;
-  z-index: 10;
-}
-
-.afp-fs-canvas-scroll {
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.afp-fs-canvas-transform {
-  width: 100%;
-  max-width: 950px;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
 @media (max-width: 768px) {
-  .apt-ref-fp-stage-card {
-    padding: 16px 12px;
+  .afp-stage-card {
+    padding: 24px 12px 18px 12px;
+    border-radius: 16px;
   }
-  .afp-canvas-transform {
-    min-width: 650px;
+  .afp-unit-badge {
+    padding: 4px 8px;
+    min-width: 52px;
   }
-  .afp-viewport {
-    min-height: 400px;
+  .afp-badge-num {
+    font-size: 11px;
+  }
+  .afp-badge-type {
+    font-size: 9px;
   }
 }
 

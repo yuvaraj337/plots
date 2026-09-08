@@ -412,19 +412,16 @@ function renderScreenFloorPlan() {
           <div class="legend-item"><span class="dot available"></span> Available</div>
           <div class="legend-item"><span class="dot booked"></span> Booked</div>
           <div class="legend-item"><span class="dot hold"></span> On Hold</div>
-          <div class="legend-item"><span class="dot sold"></span> Sold</div>
         </div>
 
-        <!-- 100% Code-Driven 3D Vector Architectural Floor Plan Stage -->
-        <div class="apt-ref-fp-stage-card">
-          ${renderApartmentFloorPlan({
-            units: floorUnitsData,
-            activeUnitId: selectedUnit.id,
-            tower: selectedTower,
-            floor: selectedFloor,
-            projectName: 'VR Elite Towers'
-          })}
-        </div>
+        <!-- 10,000% Exact Interactive 3D Architectural Floor Plan Stage -->
+        ${renderApartmentFloorPlan({
+          units: floorUnitsData,
+          activeUnitId: selectedUnit.id,
+          tower: selectedTower,
+          floor: selectedFloor,
+          projectName: 'VR Elite Towers'
+        })}
       </div>
     </section>
   `;
