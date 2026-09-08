@@ -19,8 +19,8 @@ import './components/sharedBookSiteVisit.js';
 
 const routes = {
   '/': renderHomePage,
-  '/open-plots': () => renderProjectDetail('vr-green-meadows'),
-  '/open-plots.html': () => renderProjectDetail('vr-green-meadows'),
+  '/open-plots': renderOpenPlotsPage,
+  '/open-plots.html': renderOpenPlotsPage,
   '/villas': () => renderVillasPage('/villas'),
   '/vr-green-meadows': () => renderProjectDetail('vr-green-meadows'),
   '/vr-prime-meadows': () => renderProjectDetail('vr-green-meadows'),
