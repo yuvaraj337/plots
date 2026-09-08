@@ -5,6 +5,7 @@
 
 import { renderHeader, initStickyNav } from '../components/header.js';
 import { renderFooter, initScrollTop } from '../components/footer.js';
+import { renderApartmentFloorPlan, initApartmentFloorPlan } from '../components/apartmentFloorPlan.js';
 
 /* ═══════════════════ APPLICATION STATE ═══════════════════ */
 let selectedFilter = 'all';
@@ -30,7 +31,7 @@ let selectedUnit = {
   beds: '3',
   baths: '3',
   balconies: '2',
-  status: 'Available',
+  status: 'On Hold',
   thumb: '/images/journey/apt_elite_towers.jpg'
 };
 
@@ -81,12 +82,12 @@ const projectsData = [
 ];
 
 const floorUnitsData = [
-  { id: 'A-701', type: '2 BHK', size: '1,200 Sq.Ft.', price: '₹ 95 Lakhs', facing: 'North Facing', beds: '2', baths: '2', balconies: '1' },
-  { id: 'A-702', type: '3 BHK', size: '1,450 Sq.Ft.', price: '₹ 1.20 Cr', facing: 'East Facing', beds: '3', baths: '3', balconies: '2' },
-  { id: 'A-703', type: '3 BHK', size: '1,500 Sq.Ft.', price: '₹ 1.28 Cr', facing: 'West Facing', beds: '3', baths: '3', balconies: '2' },
-  { id: 'A-704', type: '3 BHK', size: '1,850 Sq.Ft.', price: '₹ 1.25 Cr', facing: 'East Facing', beds: '3', baths: '3', balconies: '2', isHighlight: true },
-  { id: 'A-705', type: '2 BHK', size: '1,220 Sq.Ft.', price: '₹ 98 Lakhs', facing: 'North Facing', beds: '2', baths: '2', balconies: '1' },
-  { id: 'A-706', type: '3 BHK', size: '1,480 Sq.Ft.', price: '₹ 1.24 Cr', facing: 'South Facing', beds: '3', baths: '3', balconies: '2' }
+  { id: 'A-701', num: 'A-701', type: '2 BHK', size: '1,200 Sq.Ft.', price: '₹ 95 Lakhs', facing: 'North Facing', beds: '2', baths: '2', balconies: '1', status: 'available', pos: { x: 40, y: 35, width: 275, height: 260 }, thumb: '/images/journey/room_living.jpg' },
+  { id: 'A-702', num: 'A-702', type: '3 BHK', size: '1,450 Sq.Ft.', price: '₹ 1.20 Cr', facing: 'East Facing', beds: '3', baths: '3', balconies: '2', status: 'available', pos: { x: 335, y: 35, width: 230, height: 260 }, thumb: '/images/journey/room_living.jpg' },
+  { id: 'A-703', num: 'A-703', type: '3 BHK', size: '1,500 Sq.Ft.', price: '₹ 1.28 Cr', facing: 'West Facing', beds: '3', baths: '3', balconies: '2', status: 'available', pos: { x: 585, y: 35, width: 275, height: 260 }, thumb: '/images/journey/room_living.jpg' },
+  { id: 'A-704', num: 'A-704', type: '3 BHK', size: '1,850 Sq.Ft.', price: '₹ 1.25 Cr', facing: 'East Facing', beds: '3', baths: '3', balconies: '2', status: 'on_hold', isHighlight: true, pos: { x: 40, y: 375, width: 275, height: 270 }, thumb: '/images/journey/room_living.jpg' },
+  { id: 'A-705', num: 'A-705', type: '2 BHK', size: '1,220 Sq.Ft.', price: '₹ 98 Lakhs', facing: 'North Facing', beds: '2', baths: '2', balconies: '1', status: 'available', pos: { x: 335, y: 385, width: 230, height: 260 }, thumb: '/images/journey/room_living.jpg' },
+  { id: 'A-706', num: 'A-706', type: '3 BHK', size: '1,480 Sq.Ft.', price: '₹ 1.24 Cr', facing: 'South Facing', beds: '3', baths: '3', balconies: '2', status: 'available', pos: { x: 585, y: 375, width: 275, height: 270 }, thumb: '/images/journey/room_living.jpg' }
 ];
 
 const roomStudioData = [
@@ -411,53 +412,18 @@ function renderScreenFloorPlan() {
           <div class="legend-item"><span class="dot available"></span> Available</div>
           <div class="legend-item"><span class="dot booked"></span> Booked</div>
           <div class="legend-item"><span class="dot hold"></span> On Hold</div>
+          <div class="legend-item"><span class="dot sold"></span> Sold</div>
         </div>
 
-        <!-- Floor Plan Blueprint Interactive Card -->
+        <!-- 100% Code-Driven 3D Vector Architectural Floor Plan Stage -->
         <div class="apt-ref-fp-stage-card">
-          <div class="fp-interactive-wrapper">
-            <!-- Floor Plan Graphic Image -->
-            <img src="/images/journey/apt_floor_plan.png" alt="Floor Plan Layout" class="fp-blueprint-img" />
-            
-            <!-- Interactive Clickable Overlay Buttons for all 6 units -->
-            <div class="fp-overlay-hotspots">
-              <!-- Top Row Units -->
-              <button type="button" class="fp-hotspot-btn u-701" onclick="window._aptSelectUnit('A-701')" aria-label="Select Unit A-701 2 BHK">
-                <span class="hotspot-title">A-701</span>
-                <span class="hotspot-sub">2 BHK</span>
-              </button>
-              <button type="button" class="fp-hotspot-btn u-702" onclick="window._aptSelectUnit('A-702')" aria-label="Select Unit A-702 3 BHK">
-                <span class="hotspot-title">A-702</span>
-                <span class="hotspot-sub">3 BHK</span>
-              </button>
-              <button type="button" class="fp-hotspot-btn u-703" onclick="window._aptSelectUnit('A-703')" aria-label="Select Unit A-703 3 BHK">
-                <span class="hotspot-title">A-703</span>
-                <span class="hotspot-sub">3 BHK</span>
-              </button>
-
-              <!-- Bottom Row Units -->
-              <button type="button" class="fp-hotspot-btn u-704 active-gold" onclick="window._aptSelectUnit('A-704')" aria-label="Select Unit A-704 3 BHK">
-                <span class="hotspot-title">A-704</span>
-                <span class="hotspot-sub">3 BHK</span>
-              </button>
-              <button type="button" class="fp-hotspot-btn u-705" onclick="window._aptSelectUnit('A-705')" aria-label="Select Unit A-705 2 BHK">
-                <span class="hotspot-title">A-705</span>
-                <span class="hotspot-sub">2 BHK</span>
-              </button>
-              <button type="button" class="fp-hotspot-btn u-706" onclick="window._aptSelectUnit('A-706')" aria-label="Select Unit A-706 3 BHK">
-                <span class="hotspot-title">A-706</span>
-                <span class="hotspot-sub">3 BHK</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="fp-bottom-hint">Click on a unit to view details</div>
-
-          <!-- Compass Indicator -->
-          <div class="fp-compass-indicator">
-            <span class="c-letter">N</span>
-            <span class="c-arrow">&uarr;</span>
-          </div>
+          ${renderApartmentFloorPlan({
+            units: floorUnitsData,
+            activeUnitId: selectedUnit.id,
+            tower: selectedTower,
+            floor: selectedFloor,
+            projectName: 'VR Elite Towers'
+          })}
         </div>
       </div>
     </section>
@@ -852,25 +818,36 @@ function attachEvents(screen) {
   window._aptSetTower = (val) => { selectedTower = val; };
   window._aptSetFloor = (val) => { selectedFloor = val; };
 
-  // Select Unit -> Details
+  // Initialize interactive 3D floor plan if on floorplan screen
+  if (screen === 'floorplan') {
+    initApartmentFloorPlan({ units: floorUnitsData });
+  }
+
+  // Select Unit -> Details with booking safety
   window._aptSelectUnit = (unitId) => {
     const found = floorUnitsData.find(u => u.id === unitId);
-    if (found) {
-      selectedUnit = {
-        ...selectedUnit,
-        id: found.id,
-        unitName: `${found.id} · ${found.type}`,
-        shortName: `Unit ${found.id.replace('A-', '')} - ${found.type}`,
-        price: found.price,
-        size: found.size,
-        facing: found.facing,
-        beds: found.beds,
-        baths: found.baths,
-        balconies: found.balconies
-      };
-      activeRoomIdx = 0;
-      window._aptNav('/apartments/vr-elite-towers/unit/' + found.id.toLowerCase());
+    if (!found) return;
+
+    if (found.status === 'sold') {
+      alert('This unit is sold out and unavailable for booking.');
+      return;
     }
+
+    selectedUnit = {
+      ...selectedUnit,
+      id: found.id,
+      unitName: `${found.id} · ${found.type}`,
+      shortName: `Unit ${found.id.replace('A-', '')} - ${found.type}`,
+      price: found.price,
+      size: found.size,
+      facing: found.facing,
+      beds: found.beds,
+      baths: found.baths,
+      balconies: found.balconies,
+      status: found.status === 'on_hold' ? 'On Hold' : (found.status === 'booked' ? 'Booked' : (found.status === 'sold' ? 'Sold' : 'Available'))
+    };
+    activeRoomIdx = 0;
+    window._aptNav('/apartments/vr-elite-towers/unit/' + found.id.toLowerCase());
   };
 
   // Room studio controls

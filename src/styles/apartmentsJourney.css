@@ -592,7 +592,8 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
 .legend-item {
@@ -613,108 +614,311 @@
 .legend-item .dot.available { background: #10B981; }
 .legend-item .dot.booked { background: #EF4444; }
 .legend-item .dot.hold { background: #F59E0B; }
+.legend-item .dot.sold { background: #9CA3AF; }
 
-/* Blueprint Interactive Stage */
+/* ==========================================================================
+   INTERACTIVE 3D ARCHITECTURAL FLOOR PLAN COMPONENT STYLES
+   ========================================================================== */
 .apt-ref-fp-stage-card {
   position: relative;
   background: #FFFFFF;
   border: 1px solid #E5E7EB;
   border-radius: 20px;
-  padding: 40px 24px 30px 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  text-align: center;
+  padding: 24px 20px 24px 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
 }
 
-.fp-interactive-wrapper {
+.afp-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Top Floor Plan Stage Header & Controls */
+.afp-top-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.afp-stage-title-wrap {
+  text-align: left;
+}
+
+.afp-stage-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #059669;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  display: block;
+}
+
+.afp-stage-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #11291E;
+  margin: 2px 0 0 0;
+}
+
+/* Floating Zoom & Map Controls */
+.afp-zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.afp-ctrl-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #D1D5DB;
+  background: #FFFFFF;
+  color: #374151;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.afp-ctrl-btn:hover {
+  background: #F9FAFB;
+  border-color: #11291E;
+  color: #11291E;
+}
+
+/* Viewport Stage */
+.afp-viewport {
   position: relative;
   width: 100%;
-  max-width: 580px;
-  margin: 0 auto 24px auto;
+  background: #FAF9F6;
+  border: 1px solid #EAE7E0;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.fp-blueprint-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 12px;
-}
-
-.fp-overlay-hotspots {
+/* Orientation Compass */
+.afp-compass {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr 0.65fr 1fr;
-  padding: 3.5% 2.5%;
-  gap: 8px 12px;
-  pointer-events: none;
-}
-
-.fp-hotspot-btn {
-  pointer-events: auto;
-  background: transparent;
-  border: 2px solid transparent;
-  border-radius: 14px;
-  cursor: pointer;
+  top: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #D1D5DB;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  z-index: 5;
+  pointer-events: none;
 }
 
-.fp-hotspot-btn:hover {
-  border-color: #1A3B2B;
-  background: rgba(26, 59, 43, 0.08);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.fp-hotspot-btn.active-gold {
-  border-color: #D97706;
-  background: rgba(251, 191, 36, 0.15);
-}
-
-.fp-hotspot-btn.active-gold:hover {
-  background: rgba(251, 191, 36, 0.3);
-}
-
-.fp-hotspot-btn .hotspot-title {
-  font-size: 1.05rem;
+.afp-compass .c-n {
+  font-size: 0.7rem;
   font-weight: 800;
-  color: #1F2937;
-  line-height: 1.1;
-  opacity: 0; /* Text is embedded in graphic image; hover shows outline & highlight */
+  color: #11291E;
+  line-height: 1;
 }
 
-.fp-hotspot-btn .hotspot-sub {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #4B5563;
-  margin-top: 2px;
-  opacity: 0;
-}
-
-.fp-bottom-hint {
+.afp-compass .c-arrow {
   font-size: 0.9rem;
+  font-weight: 900;
+  color: #DC2626;
+  line-height: 1;
+}
+
+.afp-canvas-scroll {
+  width: 100%;
+  overflow: auto;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.afp-canvas-transform {
+  width: 100%;
+  max-width: 820px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center center;
+}
+
+.afp-architectural-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+}
+
+/* Interactive SVG Group Hover / Focus */
+.afp-unit-group {
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.afp-unit-group:hover .afp-unit-overlay-rect {
+  fill: rgba(26, 59, 43, 0.12);
+}
+
+.afp-unit-group.status-on_hold:hover .afp-unit-overlay-rect {
+  fill: rgba(217, 119, 6, 0.28);
+}
+
+.afp-unit-group.status-booked:hover .afp-unit-overlay-rect {
+  fill: rgba(220, 38, 38, 0.24);
+}
+
+.afp-unit-group.status-sold {
+  opacity: 0.65;
+  cursor: not-allowed !important;
+}
+
+.afp-unit-group.status-sold:hover .afp-unit-overlay-rect {
+  fill: rgba(107, 114, 128, 0.35);
+}
+
+/* Floating Badges */
+.afp-badge-group {
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.afp-badge-group:hover {
+  transform: scale(1.06);
+}
+
+.afp-badge-card {
+  transition: stroke 0.15s ease, fill 0.15s ease, filter 0.15s ease;
+}
+
+.afp-bottom-bar {
+  padding-top: 8px;
+  text-align: center;
+}
+
+.afp-hint-text {
+  font-size: 0.88rem;
   color: #6B7280;
   font-weight: 500;
 }
 
-.fp-compass-indicator {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  text-align: center;
-  font-weight: 800;
-  color: #1F2937;
+/* ==========================================================================
+   FULLSCREEN MODAL OVERLAY
+   ========================================================================== */
+.afp-fs-overlay {
+  position: fixed;
+  inset: 0;
+  background: #FFFFFF;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
 }
 
-.fp-compass-indicator .c-letter { font-size: 0.85rem; display: block; }
-.fp-compass-indicator .c-arrow { font-size: 1.3rem; display: block; line-height: 1; }
+.afp-fs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #11291E;
+  color: #FFFFFF;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.afp-fs-close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.afp-fs-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.afp-fs-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.afp-fs-legend {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 0.85rem;
+}
+
+.afp-fs-legend .legend-item {
+  color: #E5E7EB;
+}
+
+.afp-fs-body {
+  flex: 1;
+  position: relative;
+  background: #FAF9F6;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.afp-fs-controls {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.afp-fs-canvas-scroll {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.afp-fs-canvas-transform {
+  width: 100%;
+  max-width: 950px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 768px) {
+  .apt-ref-fp-stage-card {
+    padding: 16px 12px;
+  }
+  .afp-canvas-transform {
+    min-width: 650px;
+  }
+  .afp-viewport {
+    min-height: 400px;
+  }
+}
 
 /* ==========================================================================
    STEP 4 — APARTMENT DETAILS / ROOM VIEW (ref: 04_apartment_details.png)
